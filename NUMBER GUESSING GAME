@@ -1,0 +1,49 @@
+import random
+name1 = input("Enter the name of player 1: ")
+name2 = input("Enter the name of player 2: ")
+print("The computer has fixed 5 numbers in its mind.")
+print("You both have three turns each to guess them.")
+print("Ready for the game?")
+nums = []
+while len(nums) != 5:
+    a = random.randint(1, 10)
+    if a not in nums:
+        nums.append(a)
+player1 = []
+player2 = []
+s1 = 0
+s2 = 0
+for i in range(3):
+    print(f"Hey {name1}, guess your choice no {i+1}:")
+    x = int(input())
+    while x in player1 or x in player2:  # Prevent duplicate guesses
+        print("You have already guessed that number, choose another.")
+        x = int(input())
+    player1.append(x)    
+    if x in nums:
+        print("--> Correct!")
+        s1 += 1
+    else:
+        print("--> Wrong!")
+for i in range(3):
+    print(f"Hey {name2}, guess your choice no {i+1}:")
+    x1 = int(input())
+    while x1 in player1 or x1 in player2:  # Prevent duplicate guesses
+        print("You have already guessed that number, choose another.")
+        x1 = int(input())
+    player2.append(x1)    
+    if x1 in nums:
+        print("--> Correct!")
+        s2 += 1
+    else:
+        print("--> Wrong!")
+print("\n--- Game Summary ---")
+print(f"{name1}'s guesses: {player1} | Score: {s1}")
+print(f"{name2}'s guesses: {player2} | Score: {s2}")
+print(f"Computer's numbers were: {nums}")
+if s1 > s2:
+    print(f"\n{name1} wins!")
+elif s2 > s1:
+    print(f"\n{name2} wins!")
+else:
+    print("\nIt's a tie!")
